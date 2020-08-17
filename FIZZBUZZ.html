@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>FIZZ BUZZ</p>
+
+<script>
+
+for (let count = 1; count < 101; count += 1){
+    if (Number.isInteger(count/15))
+        console.log(count + " FIZZBUZZ");
+    else if (Number.isInteger(count/5))
+        console.log(count + " FIZZ");
+    else if (Number.isInteger(count/3))
+        console.log(count + " BUZZ");
+    else 
+        console.log(count);
+}
+
+</script>
+
+</body>
+</html>
+
