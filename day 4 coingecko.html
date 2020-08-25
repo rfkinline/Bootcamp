@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Day 4 Week 4</title>
+</head>
+
+<body>
+   
+    <script>
+ 
+        async function getMarketCap(firstDate,secondDate){
+            
+            let basurl = "https://api.coingecko.com/api/v3/coins/dash/history?date="
+
+            var url = basurl+firstDate
+            var url2 = basurl+secondDate
+            var mcap1 = 0
+
+            var result = await fetch(url)
+            var datos = await result.json()
+            var data = await datos
+            var mcap1 = await data.market_data.market_cap.usd
+
+            var result2 = await fetch(url2)
+            var datos2 = await result2.json()
+            var data2 = await datos2
+            var mcap2 = await data2.market_data.market_cap.usd
+
+            var difCap = mcap1 - mcap2
+            if (difCap < 0) {
+                document.write("<p style=color:red;> MarketCap difference: $" + difCap.toLocaleString('en-US')+ "</p>");
+            } else {
+                document.write("<p style=color:green;> MarketCap difference: $" + difCap.toLocaleString('en-US') + "</p>");
+                 }
+             
+        }
+        getMarketCap("12-08-2020", "29-07-2020");
+
+    </script>
+</table>
+
+</body>
+
+</html>
