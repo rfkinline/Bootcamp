@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Day 5 Week 4</title>
+  <style>
+    table, td {
+      border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <table id="myTable">
+        <tr>
+        </tr>
+    </table>
+
+
+    <script>
+        function myFunction() {
+        }
+ 
+        async function getMarketCap(searchDate){
+//            document.write("f " + searchDate + "<br>");
+//            document.write("s " + i + " " + searchDate + "<br>")
+            let basurl = "https://api.coingecko.com/api/v3/coins/bitcoin/history?date="
+            var url = basurl+searchDate
+//            document.write(url)
+            var mcap1 = 0;
+            
+            var result = await fetch(url);
+            var data = await result.json();
+            var mcap1 = await data.market_data.current_price.usd;
+
+            newbtc = 6*24*12.5*mcap1/1000;
+//            document.write(searchDate + " "+newbtc + "<br>");
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            //            document.write(searchDate + " BTC: T$" + mcap1.toLocaleString('en-US')+ " New BTC/day: T$" + newbtc.toLocaleString('en-US') + "<br>");
+            // document.write(searchDate.toLocaleString() + "$" + mcap1.toLocaleString('en-US')+ "$" + newbtc.toLocaleString('en-US') + "<br>");
+            cell1.innerHTML = searchDate.toLocaleString();
+            cell2.innerHTML = mcap1.toLocaleString('en-US');
+            cell3.innerHTML = newbtc.toLocaleString('en-US');
+            myFunction(cell1, cell2, cell3);
+        }
+        var i;
+        var firstDate = "01-01-2018";
+        for (i = 0; i< 4; i ++){
+            var dateString = firstDate;
+            var startDate = new Date(dateString);
+            var day = 60 * 60 * 24 * 1000;
+            var firstDate = new Date(startDate.getTime() + day);
+            today = firstDate.toLocaleDateString();
+            var today = new Date(today);
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            searchDate = dd + '-' + mm + '-' + yyyy;
+//            tage = Date.getDate()
+//            setTimeout(getMarketCap(searchDate){ alert("Hello") }, 2000 );
+            getMarketCap(searchDate);
+//            var x = document.getElementById("txt");
+//            setTimeout(function(){ alert("Hello") }, 2000);
+        }
+    </script>
+
+</body>
+
+</html>
