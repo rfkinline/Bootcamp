@@ -9,6 +9,7 @@
       border: 1px solid black;
     }
     </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -21,36 +22,48 @@
     <script>
         function myFunction() {
         }
- 
-        async function getMarketCap(searchDate){
+
+        async function getMarketCap(searchDate, searchDateinv){
 //            document.write("f " + searchDate + "<br>");
 //            document.write("s " + i + " " + searchDate + "<br>")
             let basurl = "https://api.coingecko.com/api/v3/coins/bitcoin/history?date="
             var url = basurl+searchDate
 //            document.write(url)
             var mcap1 = 0;
-            
-            var result = await fetch(url);
-            var data = await result.json();
+            const result = await fetch(url);
+            const data = await result.json();
             var mcap1 = await data.market_data.current_price.usd;
+            var newblocks = 144
+            newblockscumul = newblockscumul + newblocks*12.5
+//            var sf = (newblockscumul-blocksav)
+            var sf = (blocksav-1018750)/((newblockscumul-blocksav)*420)
+            console.log(sf)           
 
+            blocksav = newblockscumul
             newbtc = 6*24*12.5*mcap1/1000;
 //            document.write(searchDate + " "+newbtc + "<br>");
-            var table = document.getElementById("myTable");
+            var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
             var row = table.insertRow(0);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
-            //            document.write(searchDate + " BTC: T$" + mcap1.toLocaleString('en-US')+ " New BTC/day: T$" + newbtc.toLocaleString('en-US') + "<br>");
-            // document.write(searchDate.toLocaleString() + "$" + mcap1.toLocaleString('en-US')+ "$" + newbtc.toLocaleString('en-US') + "<br>");
-            cell1.innerHTML = searchDate.toLocaleString();
-            cell2.innerHTML = mcap1.toLocaleString('en-US');
-            cell3.innerHTML = newbtc.toLocaleString('en-US');
+            cell2.innerHTML = searchDateinv.toLocaleString();
+            cell1.innerHTML = newblockscumul.toLocaleString('en-US');
+            cell3.innerHTML = sf.toLocaleString('en-US');
+
+            var tbody = $('#myTable').find('tbody');
+                tbody.find('tr').sort(function (a, b) {
+                return $('td:first', a).text().localeCompare($('td:first', b).text());
+                }).appendTo(tbody);
+
             myFunction(cell1, cell2, cell3);
         }
+
         var i;
+        var newblockscumul = 16767250
+        var blocksav = 5029/31;
         var firstDate = "01-01-2018";
-        for (i = 0; i< 4; i ++){
+        for (i = 0; i< 31; i ++){
             var dateString = firstDate;
             var startDate = new Date(dateString);
             var day = 60 * 60 * 24 * 1000;
@@ -61,11 +74,8 @@
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             searchDate = dd + '-' + mm + '-' + yyyy;
-//            tage = Date.getDate()
-//            setTimeout(getMarketCap(searchDate){ alert("Hello") }, 2000 );
-            getMarketCap(searchDate);
-//            var x = document.getElementById("txt");
-//            setTimeout(function(){ alert("Hello") }, 2000);
+            searchDateinv = yyyy + '-' + mm + '-' + dd;
+            getMarketCap(searchDate, searchDateinv);
         }
     </script>
 
