@@ -24,12 +24,11 @@
         }
 
         async function getMarketCap(searchDate, searchDateinv){
-//            document.write("f " + searchDate + "<br>");
-//            document.write("s " + i + " " + searchDate + "<br>")
             let basurl = "https://api.coingecko.com/api/v3/coins/bitcoin/history?date="
             var url = basurl+searchDate
 //            document.write(url)
             var mcap1 = 0;
+// problem as fucntion is not waiting for api before proceeding to next fetch
             const result = await fetch(url);
             const data = await result.json();
             var mcap1 = await data.market_data.current_price.usd;
@@ -38,10 +37,8 @@
 //            var sf = (newblockscumul-blocksav)
             var sf = (blocksav-1018750)/((newblockscumul-blocksav)*420)
             console.log(sf)           
-
             blocksav = newblockscumul
             newbtc = 6*24*12.5*mcap1/1000;
-//            document.write(searchDate + " "+newbtc + "<br>");
             var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
             var row = table.insertRow(0);
             var cell1 = row.insertCell(0);
