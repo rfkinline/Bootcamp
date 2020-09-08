@@ -1,4 +1,5 @@
-pragma solidity 0.5.12;
+pragma solidity 0.7.0;
+// SPDX-License-Identifier: UNLICENSED
 
 contract HelloWorld{
 // variables
@@ -10,10 +11,6 @@ contract HelloWorld{
     uint public number = 123;
     bool public isHappy = true;
     address public contractCreator = 0x89b0A44b793209b4006FC203580866d331b7750F;
-
-    function getNumber (uint index) public view returns (uint){
-        return numbers[index];
-    }
 
     function getMessage() public view returns (string memory){
         return message;
@@ -27,6 +24,10 @@ contract HelloWorld{
     uint[4] public numbersmax=[1,2,4,6];   // [4] indicates maximum number in array
     string[] public animal = ["dog", "cat"];
     
+    function getNumber (uint index) public view returns (uint){
+        return numbers[index];
+    }
+
 // change value in array
     function setNumber (uint newNumber, uint index) public {
         numbers [index] = newNumber;
