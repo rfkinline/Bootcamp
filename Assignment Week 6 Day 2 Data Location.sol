@@ -13,8 +13,12 @@ contract MemoryAndStorage {
     }
 
     function updateBalance(uint id, uint balance) public {
+// replace memory with storage
          User storage user = users[id];
          user.balance = balance;
+
+//     better
+//          users[id].balance = balance;
     }
 
     function getBalance(uint id) view public returns (uint) {

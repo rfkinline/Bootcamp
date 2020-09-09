@@ -1,9 +1,9 @@
-pragma solidity 0.7.0;
-// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.5.12;
 
 contract HelloWorld{
-// require: check for enough GWEI and balance for transaction, check inputs somebody using your function,  example: require(msg.sender == owner)
-// assert(): check for internal errors and check for invariants. Therefore an assert error should be unusual
+// storage: what is stored permanently. Not for variables. As long as the contract lives. Is more expensive than memory
+// memory: for strings and struct. only saved during function execution
+// stack: local variables like uint. only saved during function execution
 
 
 // struct (object or data structure) ---------------------------------------------
@@ -16,7 +16,13 @@ contract HelloWorld{
 
 // will be called only at time of creation. Needed for the require
     address public owner;
-
+    
+//modifiers will be colled beofer a function
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Caller needs to be owner");
+        _;  //this means: continue the execution
+    }
+    
     constructor() public {
         owner = msg.sender;
     }
@@ -25,8 +31,7 @@ contract HelloWorld{
     
 // only the owner can list the address
     address[] private creators;
-    function getCreator(uint index) public view returns (address) {
-        require(msg.sender == owner);
+    function getCreator(uint index) public view onlyOwner returns (address) {
         return creators[index];
     }
 
@@ -34,7 +39,7 @@ contract HelloWorld{
 // everything after the require will be executed if condition is met
         require (age < 150, "Age needs to be under 150");
         address creator = msg.sender;
-        people[creator] = Person(name, age, height, senior);
+        people [creator]  = Person (name, age, height, senior);
 // add the address of the creator to a list
         creators.push(msg.sender);
 // abi.encoded will create a hexadecimal string: reason: that way the content can be compared. keccak256 will hash the string
@@ -47,8 +52,7 @@ contract HelloWorld{
         return (creator, people[creator].name, people[creator].age, people[creator].height, people[creator].senior);
     }
 
-    function deletePerson(address creator) public {
-        require(msg.sender == owner, "Caller needs to be owner");
+    function deletePerson(address creator) public onlyOwner {
             delete people[creator];
 // check age = 150
         assert(people[creator].age == 0);
