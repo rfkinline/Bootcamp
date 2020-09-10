@@ -17,7 +17,7 @@ contract HelloWorld{
 // will be called only at time of creation. Needed for the require
     address public owner;
     
-//modifiers will be colled beofer a function
+//modifiers will be called beofer a function
     modifier onlyOwner() {
         require(msg.sender == owner, "Caller needs to be owner");
         _;  //this means: continue the execution
