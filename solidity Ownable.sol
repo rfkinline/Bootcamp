@@ -87,11 +87,11 @@ instance.createPerson.value(msg.value)(name,age,height);
     function deletePerson(address creator) public onlyOwner {
       string memory name = people[creator].name;
       bool senior = people[creator].senior;
-
-       delete people[creator];
-       assert(people[creator].age == 0);
-       emit personDeleted(name, senior, owner);
+      delete people[creator];
+      assert(people[creator].age == 0);
+      emit personDeleted(name, senior, owner);
    }
+   
    function getCreator(uint index) public view onlyOwner returns(address){
        return creators[index];
    }
