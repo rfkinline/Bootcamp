@@ -11,6 +11,7 @@ contract HelloWorld{
     uint public number = 123;
     bool public isHappy = true;
     address public contractCreator = 0x89b0A44b793209b4006FC203580866d331b7750F;
+// uint8 8 bits in size. biggest number is 255. from 0
 
     function getMessage() public view returns (string memory){
         return message;
