@@ -6,7 +6,7 @@ contract HelloWorld{
 // stack: local variables like uint. only saved during function execution
 
 
-// struct (object or data structure) ---------------------------------------------
+// struct (similar to class/object in JS or data structure like arrays) -----it is a collection of variables----------------------------------------
     struct Person {
         string name;
         uint age;
