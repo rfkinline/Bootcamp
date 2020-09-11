@@ -13,7 +13,7 @@ contract ERC20 {
 
     mapping (address => uint256) private _balances;
  
-    constructor(string memory name, string memory symbol, uint256 decimals) public {
+    constructor(string memory name, string memory symbol, uint8 decimals) public {
         _name = name;
         _symbol = symbol;
         _decimals = decimals;
@@ -27,7 +27,7 @@ contract ERC20 {
         return _symbol;
     }
     
-    function decimals() public view returns (uint256){
+    function decimals() public view returns (uint8){
         return _decimals;
     }
     
