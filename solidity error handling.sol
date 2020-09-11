@@ -14,9 +14,8 @@ contract HelloWorld{
         bool senior;
     }
 
-// will be called only at time of creation. Needed for the require
+// constructor is the function that runs whenever the contractor is created. It wilkl run only once. it cannot be called manually
     address public owner;
-
     constructor() public {
         owner = msg.sender;
     }
