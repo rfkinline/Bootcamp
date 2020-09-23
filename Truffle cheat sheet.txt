@@ -1,0 +1,23 @@
+Bootcamp 2020 / Categories / Day 4 / Deploying our First Contract
+
+create folder
+in CMD in that folder type "truffle init"
+go to editor
+create contract under the CONTRACTS folder
+go back to CMD and use "truffle compile"
+the result is displaied under the folder build/contracts
+
+now create migration files under the folder migrations
+Reihenfolge: Start with 1_ then 2_...use names under build
+
+Open Ganache and link the contracts (under CONTRACTS)
+
+in CMD type "truffle migrate"
+
+in CMD "truffle console"
+
+before new deployment: migrate 
+before next deployment: migrate --reset
+
+
+

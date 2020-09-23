@@ -1,7 +1,6 @@
 pragma solidity 0.5.12;
 
 // Mapping is like a better array. A better data structure where we don't have to remember a position in an array or have to look through an entire array to find a person.
-// 
 
 contract HelloWorld{
     struct Person {
