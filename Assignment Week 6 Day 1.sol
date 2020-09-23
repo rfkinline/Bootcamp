@@ -1,4 +1,4 @@
-pragma solidity 0.7.0;
+pragma solidity 0.5.12;
 // SPDX-License-Identifier: UNLICENSED
 
 contract Week6Day1{
