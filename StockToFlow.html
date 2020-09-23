@@ -59,7 +59,9 @@
         var i;
         var newblockscumul = 16767250
         var blocksav = 5029/31;
-        var firstDate = "01-01-2018";
+        getData();
+        async function getData(){
+            var firstDate = "01-01-2018";
         for (i = 0; i< 31; i ++){
             var dateString = firstDate;
             var startDate = new Date(dateString);
@@ -72,7 +74,8 @@
             var yyyy = today.getFullYear();
             searchDate = dd + '-' + mm + '-' + yyyy;
             searchDateinv = yyyy + '-' + mm + '-' + dd;
-            getMarketCap(searchDate, searchDateinv);
+            await getMarketCap(searchDate, searchDateinv);
+        }
         }
     </script>
 
